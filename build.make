@@ -5,7 +5,7 @@ core = 7.x
 includes[] = drupal-org-core.make
 
 ; Download the install profile and recursively build all its dependencies
-projects[nb2][type] = profile
-projects[nb2][download][type] = git
-projects[nb2][download][branch] = master
-projects[nb2][download][url] = git@github.com:sanduhrs/nb2.git
+projects[nb][type] = profile
+projects[nb][download][type] = git
+projects[nb][download][branch] = master
+projects[nb][download][url] = git@github.com:sanduhrs/nb2.git
