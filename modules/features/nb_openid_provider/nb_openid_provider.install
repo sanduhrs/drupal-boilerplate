@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function nb_openid_provider_install() {
+  // Add additional field
+  $record = array(
+    'name' => 'email',
+    'title' => 'Email',
+    'description' => '',
+    'required' => 0,
+  );
+  drupal_write_record('oauthconnector_fields', $record);
+
+  // Add OAuth providers
+  $records = array(
+    array(
+      'name' => 'facebook',
+      'title' => 'Facebook',
+      'url' => 'https://graph.facebook.com',
+      'csid' => 1,
+      'consumer_advanced' => 'a:7:{s:6:"oauth2";i:1;s:16:"signature method";s:9:"HMAC-SHA1";s:20:"authentication realm";s:0:"";s:22:"request token endpoint";s:20:"/oauth/request_token";s:19:"authorization scope";s:17:"email,read_stream";s:22:"authorization endpoint";s:37:"https://www.facebook.com/dialog/oauth";s:21:"access token endpoint";s:19:"/oauth/access_token";}',
+      'mapping' => 'a:2:{s:6:"fields";a:4:{s:3:"uid";a:5:{s:8:"resource";s:29:"https://graph.facebook.com/me";s:11:"method post";i:0;s:5:"field";s:2:"id";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:5:"email";a:5:{s:8:"resource";s:0:"";s:11:"method post";i:0;s:5:"field";s:0:"";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:4:"name";a:5:{s:8:"resource";s:29:"https://graph.facebook.com/me";s:11:"method post";i:0;s:5:"field";s:4:"name";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:6:"avatar";a:5:{s:8:"resource";s:0:"";s:11:"method post";i:0;s:5:"field";s:0:"";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}}s:6:"format";s:4:"json";}',
+    ),
+    array(
+      'name' => 'google',
+      'title' => 'Google',
+      'url' => 'https://accounts.google.com',
+      'csid' => 2,
+      'consumer_advanced' => 'a:7:{s:6:"oauth2";i:1;s:16:"signature method";s:9:"HMAC-SHA1";s:20:"authentication realm";s:18:"authorization_code";s:22:"request token endpoint";s:4:"none";s:19:"authorization scope";s:95:"https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";s:22:"authorization endpoint";s:14:"/o/oauth2/auth";s:21:"access token endpoint";s:15:"/o/oauth2/token";}',
+      'mapping' => 'a:2:{s:6:"fields";a:4:{s:3:"uid";a:5:{s:8:"resource";s:45:"https://www.googleapis.com/oauth2/v1/userinfo";s:11:"method post";i:0;s:5:"field";s:2:"id";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:5:"email";a:5:{s:8:"resource";s:0:"";s:11:"method post";i:0;s:5:"field";s:0:"";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:4:"name";a:5:{s:8:"resource";s:45:"https://www.googleapis.com/oauth2/v1/userinfo";s:11:"method post";i:0;s:5:"field";s:4:"name";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:6:"avatar";a:5:{s:8:"resource";s:0:"";s:11:"method post";i:0;s:5:"field";s:7:"picture";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}}s:6:"format";s:4:"json";}',
+    ),
+    array(
+      'name' => 'twitter',
+      'title' => 'Twitter',
+      'url' => 'https://api.twitter.com',
+      'csid' => 3,
+      'consumer_advanced' => 'a:7:{s:6:"oauth2";i:0;s:16:"signature method";s:9:"HMAC-SHA1";s:20:"authentication realm";s:0:"";s:22:"request token endpoint";s:20:"/oauth/request_token";s:19:"authorization scope";s:0:"";s:22:"authorization endpoint";s:16:"/oauth/authorize";s:21:"access token endpoint";s:19:"/oauth/access_token";}',
+      'mapping' => 'a:2:{s:6:"fields";a:4:{s:3:"uid";a:5:{s:8:"resource";s:57:"https://api.twitter.com/1/account/verify_credentials.json";s:11:"method post";i:0;s:5:"field";s:2:"id";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:5:"email";a:5:{s:8:"resource";s:0:"";s:11:"method post";i:0;s:5:"field";s:0:"";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:4:"name";a:5:{s:8:"resource";s:57:"https://api.twitter.com/1/account/verify_credentials.json";s:11:"method post";i:0;s:5:"field";s:4:"name";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}s:6:"avatar";a:5:{s:8:"resource";s:57:"https://api.twitter.com/1/account/verify_credentials.json";s:11:"method post";i:0;s:5:"field";s:17:"profile_image_url";s:9:"querypath";b:0;s:15:"sync_with_field";s:0:"";}}s:6:"format";s:4:"json";}',
+    )
+  );
+  foreach ($records as $record) {
+    $record['consumer_advanced'] = unserialize($record['consumer_advanced']);
+    $record['mapping'] = unserialize($record['mapping']);
+    drupal_write_record('oauthconnector_provider', $record);
+  }
+
+  // Add OAuth consumer secrets
+  // To be set in settings-local.php
+  if (isset($conf['oauth'])) {
+    foreach ($conf['oauth'] as $record) {
+      $record->configuration = unserialize($record->configuration);
+      drupal_write_record('oauth_common_consumer', $record);
+    }
+  }
+}

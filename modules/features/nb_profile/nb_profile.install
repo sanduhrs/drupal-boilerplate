@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function nb_profile_install() {
+  variable_set('user_pictures', 0);
+}
