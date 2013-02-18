@@ -1,11 +1,5 @@
-; This is a standard make file for packaging the distribution along with any
-; contributed modules/themes or external libraries. Some examples are below.
-; See http://drupal.org/node/159730 for more details.
-
 api = 2
 core = 7.x
-
-; Contributed modules; standard.
 
 ; Modules
 projects[addressfield][subdir] = "contrib"
@@ -56,25 +50,15 @@ projects[views][version] = "3.5"
 projects[xrds_simple][subdir] = "contrib"
 projects[xrds_simple][version] = "1.0"
 
+projects[connector][type] = "module"
+projects[connector][download][type] = "git"
+projects[connector][download][revision] = "e4bbe320e6be891e52a3ed424a459d4311ff8bcd"
+projects[connector][download][branch] = "7.x-1.x"
+projects[connector][subdir] = "contrib"
+
 ; Themes
 projects[responsive_bartik][type] = "theme"
 projects[responsive_bartik][download][type] = "git"
 projects[responsive_bartik][download][revision] = "7c2db58a201fd572153545b24bfcc2703c2fac80"
 projects[responsive_bartik][download][branch] = "7.x-1.x"
 projects[responsive_bartik][subdir] = "contrib"
-
-; Unstable
-e4bbe32
-projects[connector][download][type] = "git"
-projects[connector][download][version] = ""
-projects[connector][type] = "module"
-
-; Contributed projects; Sparkish.
-; @todo: Change this to peg to a stable release once 7.x-1.13 comes out.
-projects[ckeditor][type] = module
-;projects[ckeditor][version] = 1.x-dev
-projects[ckeditor][download][type] = git
-; Wed, 23 Jan 2013 09:32:00 +0000 (10:32 +0100)
-projects[ckeditor][download][revision] = a5eaedb5f673fe447f82a00e36f178ce5e4d6516
-projects[ckeditor][download][branch] = 7.x-1.x
-projects[ckeditor][subdir] = contrib
