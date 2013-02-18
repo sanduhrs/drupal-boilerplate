@@ -3,28 +3,28 @@ nb2
 
 A copy of the Drupal 7 Standard profile, with Behat/Mink testing using Travis CI.
 
-[![Build Status](https://secure.travis-ci.org/sprice/classic.png)](http://travis-ci.org/sprice/classic)
+[![Build Status](https://secure.travis-ci.org/sanduhrs/nb2.png)](http://travis-ci.org/sanduhrs/nb2)
 
 ## Installation
 
     # Create Drupal codebase
-    drush make https://raw.github.com/sprice/classic/master/build-classic.make public_html
+    drush make https://raw.github.com/sanduhrs/nb2/master/build.make public_html
 
     # Install Drupal
     cd public_html
-    drush si classic --sites-subdir=default --db-url=mysql://USERNAME:PASSWORD@localhost/DB_NAME --account-name=admin --account-pass=classic --site-mail=admin@example.com --site-name="Drupal Classic Profile" --yes
+    drush si nb --sites-subdir=default --db-url=mysql://USERNAME:PASSWORD@localhost/DB_NAME --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="NB Profile" --yes
 
     # Install testing tools
-    cd profiles/classic/tests/behat
+    cd profiles/nb/tests/behat
     curl -s http://getcomposer.org/installer | php
     php composer.phar install
 
 ##### Configure Behat
-Modify `/profiles/classic/tests/behat/behat.yml`
+Modify `/profiles/nb/tests/behat/behat.yml`
 Set `base_url` to your local host
 
     # Run tests
-    cd /profiles/classic/tests/behat
+    cd /profiles/nb/tests/behat
     ./bin/behat
 
 Create `behat.local.yml` from the example file and set your drush alias for the site.
