@@ -25,14 +25,14 @@ install:
 
 before_script:
 
-  # Install Classic Profile
+  # Install Profile
   - cd ../
   - mkdir profiles
   - mv nb2 profiles/
   - mkdir drupal
   - mv profiles drupal/
   - cd drupal
-  - drush make --prepare-install profiles/classic/build.make --yes
+  - drush make --prepare-install profiles/nb/build.make --yes
   - sudo chmod -R 777 sites/all/modules
   - drush si nb --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="NB Profile" --yes
   - drush cc all --yes
