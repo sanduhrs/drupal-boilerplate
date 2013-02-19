@@ -3,7 +3,7 @@ nb2
 
 A copy of the Drupal 7 Standard profile, with Behat/Mink testing using Travis CI.
 
-[![Build Status](https://secure.travis-ci.org/sanduhrs/nb2.png)](http://travis-ci.org/sanduhrs/nb2)
+[![Build Status](https://travis-ci.org/sanduhrs/nb2.png?branch=master)](https://travis-ci.org/sanduhrs/nb2)
 
 ## Installation
 
