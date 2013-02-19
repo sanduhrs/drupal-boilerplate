@@ -44,6 +44,7 @@ before_script:
   - sleep 3
   - nohup sudo drush runserver --root=$PWD/drupal --server=builtin :9002 &
   - sleep 3
+  - tail -n 100 nohup.out
 
   - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.25.0.jar
   - java -jar selenium-server-standalone-2.25.0.jar -p 4444 &
