@@ -1,6 +1,8 @@
 name = nb
 description = Install with commonly used features pre-configured.
 core = 7.x
+
+; Core
 dependencies[] = block
 dependencies[] = color
 dependencies[] = comment
@@ -23,7 +25,9 @@ dependencies[] = field_ui
 dependencies[] = file
 dependencies[] = rdf
 
+; Contrib
 dependencies[] = features
-dependencies[] = diff
 
-dependencies[] = devel
+; Development
+;dependencies[] = diff
+;dependencies[] = devel
