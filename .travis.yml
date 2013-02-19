@@ -27,6 +27,7 @@ before_script:
 
   # Install Profile
   - drush make build.make public_html
+  - cd public_html
   - drush si nb --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="NB Profile" --yes
   - drush cc all --yes
   - cd ../
