@@ -3,6 +3,10 @@ language: php
 php:
   - 5.4
 
+env:
+  global:
+    - PROJECT_NAME=nb2
+
 mysql:
   database: drupal
   username: root
@@ -48,7 +52,7 @@ before_script:
   - java -jar selenium-server-standalone-2.25.0.jar -p 4444 &
 
 script:
-  - cd drupal/profiles/nb2/tests/behat
+  - cd drupal/profiles/$PROJECT_NAME/tests/behat
   # behat.yml includes behat.local.yml so it must exist
   - touch behat.local.yml
   - ./bin/behat
