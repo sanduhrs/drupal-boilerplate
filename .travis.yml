@@ -28,7 +28,7 @@ install:
   - cd ../../
 
 before_script:
-  - echo "sendmail_path='tee mail.out > /dev/null'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
+  - echo "sendmail_path='/bin/true'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
 
   # Install Profile
   - cd ../
