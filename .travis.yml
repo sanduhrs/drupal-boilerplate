@@ -75,8 +75,8 @@ script:
   - casperjs screenshots.js
   - cd ../../../../../
 
-  #- cd build
-  #- drush en simpletest --yes
-  #- drush cc all
-  #- drush vset --yes simpletest_verbose FALSE
-  #- drush test-run Syslog --xml --uri=http://127.0.0.1:9002
+  - cd build
+  - drush en simpletest --yes
+  - drush cc all
+  - drush vset --yes simpletest_verbose FALSE
+  - drush test-run Syslog --xml --uri=http://127.0.0.1:9002
