@@ -30,7 +30,7 @@ before_script:
   # Install Profile
   - drush make build.make build --yes
   - cd build
-  - drush si $DRUPAL_INSTALL_PROFILE --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="$PROJECT_NAME Profile" --yes
+  - drush si $DRUPAL_INSTALL_PROFILE --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="Site-Install" --yes
   - drush cc all --yes
   - cd ../
 
@@ -50,11 +50,7 @@ before_script:
   - java -jar selenium-server-standalone-2.25.0.jar -p 4444 &
 
 script:
-  - ls -la
   - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/behat
-  - ls -la
   # behat.yml includes behat.local.yml so it must exist
   - touch behat.local.yml
-  - ls -la
   - ./bin/behat
-  - ls -la
