@@ -1,3 +1,5 @@
+var casper = require('casper').create();
+
 var links = [
   'http://127.0.0.1:9002/',
   'http://127.0.0.1:9002/user',
