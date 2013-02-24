@@ -75,9 +75,8 @@ script:
   - casperjs screenshots.js
   - cd ../../../../../
 
-  - cd build
-  - drush en simpletest --yes
-  - drush cc all
+  #- cd build
+  #- drush en simpletest --yes
+  #- drush cc all
   #- drush vset --yes simpletest_verbose FALSE
   #- drush test-run --uri=http://127.0.0.1:9002 --all --xml
-  - sudo -u www-data drush test-run --all
