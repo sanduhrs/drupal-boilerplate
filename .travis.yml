@@ -69,6 +69,14 @@ script:
   # behat.yml includes behat.local.yml so it must exist
   - touch behat.local.yml
   - ./bin/behat
+  - cd ../../../../../
 
-  - cd ../casper/
+  - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/casper
   - casperjs googlelinks.js
+  - cd ../../../../../
+
+  #- cd build
+  #- drush en simpletest --yes
+  #- drush cc all
+  #- drush vset --yes simpletest_verbose FALSE
+  #- drush test-run Syslog --xml --uri=http://127.0.0.1:9002
