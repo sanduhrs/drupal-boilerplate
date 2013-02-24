@@ -19,8 +19,8 @@ install:
   - mysql -e 'create database drupal;'
 
   # Install Drush
-  - pear channel-discover pear.drush.org
-  - pear install drush/drush-5.8.0
+  - pyrus channel-discover pear.drush.org
+  - pyrus install drush/drush-5.8.0
   - phpenv rehash
 
 
@@ -39,15 +39,29 @@ before_script:
   - composer install
   - cd ../../../../../
 
-  # Setup display for selenium
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - cd build
   - nohup drush runserver --root=$PWD --server=builtin :9002 &
   - cd ../
 
+  # Setup display
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+  # Selenium
   - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.25.0.jar
   - java -jar selenium-server-standalone-2.25.0.jar -p 4444 &
+
+  # Phantom.js
+  - export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'
+
+  # Casper.js
+  - git clone git://github.com/n1k0/casperjs.git
+  - cd casperjs
+  - git checkout tags/1.0.2
+  - ln -sf `pwd`/bin/casperjs /usr/local/bin/casperjs
+
+  - phantomjs --version
+  - casperjs --version
 
 script:
   - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/behat
