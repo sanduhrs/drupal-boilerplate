@@ -72,7 +72,7 @@ script:
   - cd ../../../../../
 
   - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/casper
-  - casperjs googlelinks.js
+  - casperjs screenshots.js
   - cd ../../../../../
 
   #- cd build
