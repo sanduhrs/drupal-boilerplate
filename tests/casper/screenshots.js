@@ -8,6 +8,7 @@ var links = [
 
 casper.start().each(links, function(self, link) {
   self.thenOpen(link, function() {
+    console.log("<img src='http://erdfisch.de/sites/all/themes/zen_ninesixty/logo.png' />);
     console.log(this.captureBase64('png'));
   });
 });
