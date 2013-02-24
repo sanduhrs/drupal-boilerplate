@@ -27,7 +27,7 @@ before_script:
   - echo "sendmail_path='/bin/true'" >> `php --ini | grep "Loaded Configuration" | awk '{print $4}'`
 
   # Install Profile
-  - drush make profiles/nb2/build.make build --yes
+  - drush make build.make build --yes
   - cd build
   - drush si nb --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="NB Profile" --yes
   - drush cc all --yes
