@@ -1,28 +1,14 @@
-var casper = require('casper').create();
+var links = [
+  'http://127.0.0.1:9002/',
+  'http://127.0.0.1:9002/user',
+  'http://127.0.0.1:9002/admin'
+];
 
-casper.start('http://127.0.0.1:9002', function() {
-  // selector capture
-  //console.log(this.captureBase64('png', '#lga'));
-  // clipRect capture
-  //console.log(this.captureBase64('png', {
-  //  top: 0,
-  //  left: 0,
-  //  width: 320,
-  //  height: 200
-  //}));
-  // whole page capture
-  console.log(this.captureBase64('png'));
+casper.start().each(links, function(self, link) {
+  self.thenOpen(link, function() {
+    console.log(this.captureBase64('png'));
+    console.log(this.captureBase64('png'));
+  });
 });
-casper.run();
 
-casper.start('http://127.0.0.1:9002/user', function() {
-  // whole page capture
-  console.log(this.captureBase64('png'));
-});
-casper.run();
-
-casper.start('http://127.0.0.1:9002/admin', function() {
-  // whole page capture
-  console.log(this.captureBase64('png'));
-});
 casper.run();
