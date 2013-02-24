@@ -9,7 +9,6 @@ var links = [
 casper.start().each(links, function(self, link) {
   self.thenOpen(link, function() {
     console.log(this.captureBase64('png'));
-    console.log(this.captureBase64('png'));
   });
 });
 
