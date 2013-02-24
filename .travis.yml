@@ -6,6 +6,7 @@ php:
 env:
   global:
     - PROJECT_NAME=nb2
+    - DRUPAL_INSTALL_PROFILE=nb
 
 mysql:
   database: drupal
@@ -29,12 +30,12 @@ before_script:
   # Install Profile
   - drush make build.make build --yes
   - cd build
-  - drush si nb --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="NB Profile" --yes
+  - drush si $DRUPAL_INSTALL_PROFILE --sites-subdir=default --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="$PROJECT_NAME Profile" --yes
   - drush cc all --yes
   - cd ../
 
   # Run composer
-  - cd build/profiles/$PROJECT_NAME/tests/behat
+  - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/behat
   - composer install
   - cd ../../../../../
 
@@ -47,7 +48,7 @@ before_script:
   - java -jar selenium-server-standalone-2.25.0.jar -p 4444 &
 
 script:
-  - cd build/profiles/$PROJECT_NAME/tests/behat
+  - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/behat
   # behat.yml includes behat.local.yml so it must exist
   - touch behat.local.yml
   - ./bin/behat
