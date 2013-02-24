@@ -5,7 +5,7 @@ Feature: Homepage
 
   Scenario: Viewing the site title
     Given I am on the homepage
-    Then I should see "NB Profile"
+    Then I should see "Site-Install"
 
   @api
   Scenario: Logging into the site
