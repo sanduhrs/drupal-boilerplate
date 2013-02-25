@@ -71,6 +71,7 @@ script:
   - ./bin/behat
   - cd ../../../../../
 
+
   - cd build/profiles/$DRUPAL_INSTALL_PROFILE/tests/casper
   - casperjs screenshots.js
   - cd ../../../../../
