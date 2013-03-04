@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the OpenID Relying Party feature.
- */
-
-include_once 'nb_openid_relying_party.features.inc';
