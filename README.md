@@ -1,36 +1,49 @@
-nb2
-===
+Drupal Boilerplate
+==================
 
-A copy of the Drupal 7 Standard profile, with Behat/Mink testing using Travis CI.
+An exlusive Drupal 7 install profile.
 
-[![Build Status](https://travis-ci.org/sanduhrs/nb2.png?branch=master)](https://travis-ci.org/sanduhrs/nb2)
+Supports acceptance testing with Behat/Mink using Travis CI.
+
+[![Build Status](https://travis-ci.org/sanduhrs/drupal-boilerplate.png?branch=master)](https://travis-ci.org/sanduhrs/drupal-boilerplate)
+
+## Prerequisites
+
+* PHP 5.4 CLI http://php.net/
+
+    sudo apt-get install php5-cli
+
+* PEAR http://pear.php.net/
+
+    sudo apt-get install php-pear
+
+* Drush http://drush.ws/
+
+    pear channel-discover pear.drush.org
+    pear install drush/drush
 
 ## Installation
 
-    # Create Drupal codebase
-    drush make https://raw.github.com/sanduhrs/nb2/master/build.make public_html
+Build the codebase as defined in this profile.
 
-    # Install Drupal
-    cd public_html
-    drush si nb --sites-subdir=default --db-url=mysql://USERNAME:PASSWORD@localhost/DB_NAME --account-name=admin --account-pass=password --site-mail=admin@example.com --site-name="NB Profile" --yes
+    drush make build.make build
 
-    # Install testing tools
-    cd profiles/nb/tests/behat
+Install the site using this profile
+
+    drush site-install boilerplate --db-url=mysql://USERNAME:PASSWORD@localhost/DB_NAME --root=${PWD}/build -y
+
+## Acceptance tests
+
+Install tools for testing
+
+    cd build/profiles/boilerplate/tests/behat/
     curl -s http://getcomposer.org/installer | php
     php composer.phar install
 
-##### Configure Behat
-Modify `/profiles/nb/tests/behat/behat.yml`
-Set `base_url` to your local host
+Add features to build/profiles/boilerplate/tests/behat/features/
+See Behat http://behat.org/ for more info.
 
     # Run tests
-    cd /profiles/nb/tests/behat
+    cd build/profiles/boilerplate/tests/behat
+    drush runserver :9002 --server=builtin &
     ./bin/behat
-
-Create `behat.local.yml` from the example file and set your drush alias for the site.
-
-## Files of note
-
-* [travis.yml](https://github.com/sprice/classic/blob/master/.travis.yml)
-* [behat.yml](https://github.com/sprice/classic/blob/master/tests/behat/behat.yml)
-* [index.features](https://github.com/sprice/classic/blob/master/tests/behat/features/index.feature)
