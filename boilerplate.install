@@ -11,7 +11,7 @@
  *
  * @see system_install()
  */
-function nb_install() {
+function boilerplate_install() {
   // Add text formats.
   $filtered_html_format = array(
     'format' => 'filtered_html',
@@ -76,7 +76,77 @@ function nb_install() {
       'module' => 'system',
       'delta' => 'main',
       'theme' => $default_theme,
-      'status' => 0,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => -1,
+      'region' => 'sidebar_first',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'node',
+      'delta' => 'recent',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'dashboard_main',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_first',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'navigation',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'sidebar_first',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'powered-by',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'footer',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'help',
+      'theme' => $default_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => $admin_theme,
+      'status' => 1,
       'weight' => 0,
       'region' => 'content',
       'pages' => '',
@@ -85,10 +155,40 @@ function nb_install() {
     array(
       'module' => 'system',
       'delta' => 'help',
-      'theme' => $default_theme,
-      'status' => 0,
+      'theme' => $admin_theme,
+      'status' => 1,
       'weight' => 0,
       'region' => 'help',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'login',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 10,
+      'region' => 'content',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'user',
+      'delta' => 'new',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'dashboard_sidebar',
+      'pages' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'search',
+      'delta' => 'form',
+      'theme' => $admin_theme,
+      'status' => 1,
+      'weight' => -10,
+      'region' => 'dashboard_sidebar',
       'pages' => '',
       'cache' => -1,
     ),
@@ -124,9 +224,9 @@ function nb_install() {
   );
 
   foreach ($types as $type) {
-    // $type = node_type_set_defaults($type);
-    // node_type_save($type);
-    // node_add_body_field($type);
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+    node_add_body_field($type);
   }
 
   // Insert default pre-defined RDF mapping into the database.
@@ -154,24 +254,24 @@ function nb_install() {
     ),
   );
   foreach ($rdf_mappings as $rdf_mapping) {
-    // rdf_mapping_save($rdf_mapping);
+    rdf_mapping_save($rdf_mapping);
   }
 
   // Default "Basic page" to not be promoted and have comments disabled.
-  // variable_set('node_options_page', array('status'));
-  // variable_set('comment_page', COMMENT_NODE_HIDDEN);
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
 
   // Don't display date and author information for "Basic page" nodes by default.
-  // variable_set('node_submitted_page', FALSE);
+  variable_set('node_submitted_page', FALSE);
 
   // Enable user picture support and set the default to a square thumbnail option.
-  // variable_set('user_pictures', '1');
-  // variable_set('user_picture_dimensions', '1024x1024');
-  // variable_set('user_picture_file_size', '800');
-  // variable_set('user_picture_style', 'thumbnail');
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
 
   // Allow visitor account creation with administrative approval.
-  // variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
 
   // Create a default vocabulary named "Tags", enabled for the 'article' content type.
   $description = st('Use tags to group articles on similar topics into categories.');
@@ -183,7 +283,7 @@ function nb_install() {
     'help' => $help,
 
   );
-  // taxonomy_vocabulary_save($vocabulary);
+  taxonomy_vocabulary_save($vocabulary);
 
   $field = array(
     'field_name' => 'field_' . $vocabulary->machine_name,
@@ -199,7 +299,7 @@ function nb_install() {
       ),
     ),
   );
-  // field_create_field($field);
+  field_create_field($field);
 
   $instance = array(
     'field_name' => 'field_' . $vocabulary->machine_name,
@@ -222,7 +322,7 @@ function nb_install() {
       ),
     ),
   );
-  // field_create_instance($instance);
+  field_create_instance($instance);
 
 
   // Create an image field named "Image", enabled for the 'article' content type.
@@ -244,7 +344,7 @@ function nb_install() {
       'settings' => array(),
     ),
   );
-  // field_create_field($field);
+  field_create_field($field);
 
 
   // Many of the following values will be defaulted, they're included here as an illustrative examples.
@@ -291,7 +391,7 @@ function nb_install() {
       ),
     ),
   );
-  // field_create_instance($instance);
+  field_create_instance($instance);
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
@@ -318,7 +418,7 @@ function nb_install() {
     'link_path' => '<front>',
     'menu_name' => 'main-menu',
   );
-  // menu_link_save($item);
+  menu_link_save($item);
 
   // Update the menu router information.
   menu_rebuild();
