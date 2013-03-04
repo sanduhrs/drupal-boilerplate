@@ -5,8 +5,8 @@ php:
 
 env:
   global:
-    - PROJECT_NAME=nb2
-    - DRUPAL_INSTALL_PROFILE=nb
+    - PROJECT_NAME=boilerplate
+    - DRUPAL_INSTALL_PROFILE=boilerplate
 
 mysql:
   database: drupal
