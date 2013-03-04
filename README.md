@@ -40,7 +40,7 @@ Install tools for testing
     curl -s http://getcomposer.org/installer | php
     php composer.phar install
 
-Add features to build/profiles/boilerplate/tests/behat/features/
+Add new tests to build/profiles/boilerplate/tests/behat/features/
 See Behat http://behat.org/ for more info.
 
     # Run tests
