@@ -47,3 +47,7 @@ See Behat http://behat.org/ for more info.
     cd build/profiles/boilerplate/tests/behat
     drush runserver :9002 --server=builtin &
     ./bin/behat
+
+## License
+Copyright (c) 2013 Stefan Auditor
+Licensed under the GNU General Public License, GPL v2.
